@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Controller
 public class GreetingController {
-    @GetMapping("/greeting")
+    @GetMapping("/")
     public String greeting() {
         return "home";
     }
