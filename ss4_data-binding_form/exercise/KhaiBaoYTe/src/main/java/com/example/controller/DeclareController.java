@@ -14,13 +14,13 @@ import java.util.List;
 @Controller
 public class DeclareController {
     @Autowired
-    IDeclareService declareService;
+    private IDeclareService declareService;
 
     @GetMapping("/declare")
     public String showDeclare (@ModelAttribute("declare") Declare declare , Model model) {
         model.addAttribute("declare" , declare);
-        String[] genders = new String[]{"Nam" , "Nữ" , "Không xác định"};
-        String[] nations = new String[]{"Việt Nam" , "Lào" , "Thái Lan" , "Campuchia" , "Indonesia" , "Malaisia" , "Philippin"};
+        String[] genders = declareService.findAllGenders();
+        String[] nations = declareService.findAllNations();
         model.addAttribute("genders" , genders);
         model.addAttribute("nations" , nations);
         return "show-form";

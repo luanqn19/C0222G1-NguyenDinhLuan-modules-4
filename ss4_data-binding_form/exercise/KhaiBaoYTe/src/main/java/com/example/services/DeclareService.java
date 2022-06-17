@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class DeclareService implements IDeclareService {
     @Autowired
-    IDeclareRepository declareRepository;
+    private IDeclareRepository declareRepository;
 
     @Override
     public void save (Declare declare) {
@@ -20,5 +20,15 @@ public class DeclareService implements IDeclareService {
     @Override
     public List<Declare> findAll () {
         return declareRepository.findAll();
+    }
+
+    @Override
+    public String[] findAllGenders () {
+        return declareRepository.findAllGenders();
+    }
+
+    @Override
+    public String[] findAllNations () {
+        return declareRepository.findAllNations();
     }
 }

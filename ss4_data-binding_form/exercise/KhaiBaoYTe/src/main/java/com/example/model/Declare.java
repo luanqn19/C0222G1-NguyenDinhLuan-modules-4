@@ -1,8 +1,8 @@
 package com.example.model;
 
 public class Declare {
-    String fullName, gender, nation, document, went, vehincle, dueStart, dueEnd, where, birthDay;
-    int seats;
+    private String fullName, gender, nation, document, went, vehincle, dueStart, dueEnd, where, birthDay;
+    private int seats;
 
     public Declare () {
     }

@@ -19,4 +19,16 @@ public class DeclareRepository implements IDeclareRepository {
     public List<Declare> findAll () {
         return list;
     }
+
+    @Override
+    public String[] findAllGenders () {
+        String[] genders = new String[]{"Nam" , "Nữ" , "Không xác định"};
+        return genders;
+    }
+
+    @Override
+    public String[] findAllNations () {
+        String[] nations = new String[]{"Việt Nam" , "Lào" , "Thái Lan" , "Campuchia" , "Indonesia" , "Malaisia" , "Philippin"};
+        return nations;
+    }
 }

@@ -3,7 +3,7 @@ package com.example.model;
 public class Settiing {
     private String lang, signature;
     private Integer pageSize;
-    Boolean isSpam;
+    private Boolean isSpam;
 
     public Settiing (String lang , String signature , Integer pageSize , Boolean isSpam) {
         this.lang = lang;

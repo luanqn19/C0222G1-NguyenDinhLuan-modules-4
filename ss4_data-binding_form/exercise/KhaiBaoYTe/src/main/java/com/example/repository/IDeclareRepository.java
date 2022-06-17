@@ -8,4 +8,8 @@ public interface IDeclareRepository {
     void save (Declare declare);
 
     List<Declare> findAll ();
+
+    String[] findAllGenders();
+
+    String[] findAllNations();
 }

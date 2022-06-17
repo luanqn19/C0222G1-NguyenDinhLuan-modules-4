@@ -8,4 +8,8 @@ public interface IDeclareService {
     void save (Declare declare);
 
     List<Declare> findAll ();
+
+    String[] findAllGenders();
+
+    String[] findAllNations();
 }
