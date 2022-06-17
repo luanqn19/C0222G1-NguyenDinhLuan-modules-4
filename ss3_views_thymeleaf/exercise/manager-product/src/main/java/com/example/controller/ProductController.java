@@ -13,7 +13,7 @@ import java.util.List;
 @Controller
 public class ProductController {
     @Autowired
-    IProductService productService;
+    private IProductService productService;
 
     @GetMapping("/")
     public String home () {
