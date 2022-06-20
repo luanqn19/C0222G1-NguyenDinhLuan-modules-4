@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Product</title>
+    <link rel="stylesheet" href="/resources/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/datatable/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/resources/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/resources/css/index.css">
+</head>
+<body>
+<div class="container">
+    <a class="btn btn-primary" href="/"><i class="fa fa-rotate-back"></i> Back</a>
+    <table id="listTable" class="table table-striped table-inverse">
+        <thead class="thead-inverse">
+        <tr>
+            <th>No</th>
+            <th>Mã bài hát</th>
+            <th>Tên bài hát</th>
+            <th>Tên ca sỹ</th>
+            <th>Album</th>
+            <th>Thể loại</th>
+            <th>Copyright</th>
+            <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="audio, loop : ${listAudioFile}">
+            <td th:text="${loop.count}"></td>
+            <td th:text="${audio.codeMusic}"></td>
+            <td th:text="${audio.titleMusic}"></td>
+            <td th:text="${audio.artistMusic}"></td>
+            <td th:text="${audio.albumMusic}"></td>
+            <td th:text="${audio.genreDescription}"></td>
+            <td th:text="${audio.copyRight}"></td>
+            <td>
+                <button th:data-edt="${audio.codeMusic}" type="button" class="btn btn-warning btn-sm"
+                        data-toggle="modal" data-target="#modelEdtId"
+                        onclick="getCodeProduct(this)">
+                    <i class="fa fa-pen"></i> Edit
+                </button>
+<!--                <button th:data-del="${audioFile.codeProduct}" type="button" class="btn btn-danger btn-sm"-->
+<!--                        data-toggle="modal" data-target="#modelDelId"-->
+<!--                        onclick="getCodeProductDel(this)">-->
+<!--                    <i class="fa fa-trash-can"></i> Delete-->
+<!--                </button>-->
+<!--                <a class="btn btn-info btn-sm" th:href="@{/detail/{codeProduct}(codeProduct = ${audioFile.codeProduct})}">-->
+<!--                    <i class="fa fa-info"></i> Detail</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--modal edit-->
+    <div class="modal fade" id="modelEdtId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Music</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn edit bài hát có mã là
+                    <input type="text" class="border-warning w-25" id="edt" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="doEdit()">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal delete-->
+    <div class="modal fade" id="modelDelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Mucsic</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn xoá bài hát có mã là
+                    <input type="text" class="border-warning w-25" id="del" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="doDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+<script src="/resources/js/jquery.slim.min.js"></script>
+<script src="/resources/datatable/js/jquery.dataTables.min.js"></script>
+<script src="/resources/datatable/js/dataTables.bootstrap4.min.js"></script>
+<script src="/resources/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/js/custom.js"></script>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/resources/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/resources/datatable/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/resources/css/index.css">
+</head>
+<body>
+<div class="container">
+    <div class="dropdown open">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+            Utilities
+        </button>
+        <div class="dropdown-menu" aria-labelledby="triggerId">
+            <a class="dropdown-item" href="/create">Add</a>
+            <a class="dropdown-item" href="/display">Display</a>
+            <a class="dropdown-item" href="/search">Search</a>
+            <a class="dropdown-item disabled" href="#">Luan Nguyen</a>
+        </div>
+    </div>
+</div>
+<!--    <div th:insert="~{common-product :: header-page}"></div>-->
+</body>
+<script src="/resources/js/jquery.slim.min.js"></script>
+<script src="/resources/js/popper.min.js"></script>
+<script src="/resources/datatable/js/jquery.dataTables.min.js"></script>
+<script src="/resources/datatable/js/dataTables.bootstrap4.min.js"></script>
+<script src="/resources/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/js/custom.js"></script>
+</html>
