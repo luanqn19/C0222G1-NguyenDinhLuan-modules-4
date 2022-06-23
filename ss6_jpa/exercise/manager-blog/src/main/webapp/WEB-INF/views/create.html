@@ -47,10 +47,8 @@
         </div>
         <div class="form-group row">
             <label for="catalog">Danh mục: </label>
-            <select name="catalog" class="form-control" id="catalog" th:field="*{idCatalog}">
-                <th:block th:each="catalog:${catalogList}">
-                    <option th:value="${catalog.idCatalog}" th:text="${catalog.typeCatalog}"></option>
-                </th:block>
+            <select name="catalog" class="form-control" id="catalog" th:field="*{catalog}">
+                <option th:each="catalog:${catalogList}" th:value="${catalog.idCatalog}" th:text="${catalog.typeCatalog}"></option>
             </select>
         </div>
         <div class="form-group text-center">

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new User</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="container">
+    <div th:if="${msg != null}">
+        <a class="btn btn-primary" href="/"><i class="fa fa-rotate-back"></i> Back</a>
+    </div>
+    <div class="justify-content-center text-center">
+        <h2>Thêm mới người dùng</h2>
+        <h3 style="color: red; font-style: italic" th:if="${msg != null}">Thêm mới người dùng thành công</h3>
+    </div>
+
+    <form th:object="${user}" action="/save" method="post">
+<!--        <div class="form-group row" hidden>-->
+<!--            <label for="idUser">Mã user: </label>-->
+<!--            <input id="idUser" class="form-control" type="number" th:field="*{id}">-->
+<!--        </div>-->
+        <div class="form-group row">
+            <label for="firstName">First Name: </label>
+            <input id="firstName" class="form-control" type="text" th:field="*{firstName}">
+            <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error"  th:errors="*{firstName}"></p>
+        </div>
+        <div class="form-group row">
+            <label for="lastName">Last Name: </label>
+            <input id="lastName" class="form-control" type="text" th:field="*{lastName}">
+            <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error"  th:errors="*{lastName}"></p>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label for="phone">Số điện thoại: </label>
+                <input id="phone" class="form-control" type="text" th:field="*{phone}">
+                <p th:if="${#fields.hasErrors('phone')}" th:errorclass="error"  th:errors="*{phone}"></p>
+            </div>
+            <div class="col-4">
+                <label for="age">Số tuổi: </label>
+                <input id="age" class="form-control" type="number" th:field="*{age}">
+                <p th:if="${#fields.hasErrors('age')}" th:errorclass="error"  th:errors="*{age}"></p>
+            </div>
+            <div class="col-4">
+                <label for="email">Email: </label>
+                <input id="email" class="form-control" type="text" th:field="*{email}">
+                <p th:if="${#fields.hasErrors('email')}" th:errorclass="error"  th:errors="*{email}"></p>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <button class="btn btn-primary btn-lg" type="submit"><i class="fa fa-save"></i> Add new</button>
+            <a class="btn btn-danger btn-lg" href="/"><i class="fa fa-cancel"></i> Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>

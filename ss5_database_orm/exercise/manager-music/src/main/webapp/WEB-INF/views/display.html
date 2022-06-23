@@ -15,6 +15,7 @@
         <thead class="thead-inverse">
         <tr>
             <th>No</th>
+            <th>Album Art</th>
             <th>Mã bài hát</th>
             <th>Tên bài hát</th>
             <th>Tên ca sỹ</th>
@@ -27,6 +28,7 @@
         <tbody>
         <tr th:each="audio, loop : ${listAudioFile}">
             <td th:text="${loop.count}"></td>
+            <td><img th:src="${audio.pathCover}" alt="cover-image"></td>
             <td th:text="${audio.codeMusic}"></td>
             <td th:text="${audio.titleMusic}"></td>
             <td th:text="${audio.artistMusic}"></td>
@@ -34,18 +36,23 @@
             <td th:text="${audio.genreDescription}"></td>
             <td th:text="${audio.copyRight}"></td>
             <td>
-                <button th:data-edt="${audio.codeMusic}" type="button" class="btn btn-warning btn-sm"
-                        data-toggle="modal" data-target="#modelEdtId"
-                        onclick="getCodeProduct(this)">
-                    <i class="fa fa-pen"></i> Edit
-                </button>
-<!--                <button th:data-del="${audioFile.codeProduct}" type="button" class="btn btn-danger btn-sm"-->
-<!--                        data-toggle="modal" data-target="#modelDelId"-->
-<!--                        onclick="getCodeProductDel(this)">-->
-<!--                    <i class="fa fa-trash-can"></i> Delete-->
-<!--                </button>-->
-<!--                <a class="btn btn-info btn-sm" th:href="@{/detail/{codeProduct}(codeProduct = ${audioFile.codeProduct})}">-->
-<!--                    <i class="fa fa-info"></i> Detail</a>-->
+                <audio controls>
+                    <source th:src="${audio.pathMedia}" type="audio/mp3">
+                </audio>
+
+
+                <!--                <button th:data-edt="${audio.codeMusic}" type="button" class="btn btn-warning btn-sm"-->
+                <!--                        data-toggle="modal" data-target="#modelEdtId"-->
+                <!--                        onclick="getCodeProduct(this)">-->
+                <!--                    <i class="fa fa-pen"></i> Edit-->
+                <!--                </button>-->
+                <!--                <button th:data-del="${audioFile.codeProduct}" type="button" class="btn btn-danger btn-sm"-->
+                <!--                        data-toggle="modal" data-target="#modelDelId"-->
+                <!--                        onclick="getCodeProductDel(this)">-->
+                <!--                    <i class="fa fa-trash-can"></i> Delete-->
+                <!--                </button>-->
+                <!--                <a class="btn btn-info btn-sm" th:href="@{/detail/{codeProduct}(codeProduct = ${audioFile.codeProduct})}">-->
+                <!--                    <i class="fa fa-info"></i> Detail</a>-->
             </td>
         </tr>
         </tbody>

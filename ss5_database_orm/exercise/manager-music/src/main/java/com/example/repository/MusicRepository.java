@@ -13,13 +13,15 @@ import java.util.List;
 
 @Repository
 public class MusicRepository implements IMusicRepository {
+    private static final String PATH_COVER = "D:\\TestGit\\modules4\\ss5_database_orm\\exercise\\manager-music\\src\\main\\webapp\\WEB-INF\\views\\image\\";
     private List<AudioFile> list = new ArrayList<>();
 
     public String splitName (String pathFile) {
         System.out.println(pathFile.substring(pathFile.indexOf("\\music") + 7, pathFile.lastIndexOf('.')));
         return pathFile.substring(pathFile.indexOf("\\music") + 7, pathFile.lastIndexOf('.')) + ".jpeg";
     }
-    public void getAlbumArt (String pathFile) {
+
+    public void createAlbumArt (String pathFile) {
         Mp3File mp3file = null;
         try {
             mp3file = new Mp3File(pathFile);
@@ -30,7 +32,7 @@ public class MusicRepository implements IMusicRepository {
                     String mimeType = id3v2Tag.getAlbumImageMimeType();
                     System.out.println(mimeType);
                     RandomAccessFile file = new RandomAccessFile
-                            ("D:\\TestGit\\modules4\\ss5_database_orm\\exercise\\manager-music\\src\\main\\webapp\\WEB-INF\\views\\image\\" + splitName(pathFile) , "rw");
+                            (PATH_COVER + splitName(pathFile) , "rw");
 
                     file.write(imageData);
                     file.close();
@@ -58,14 +60,15 @@ public class MusicRepository implements IMusicRepository {
                 mp3File = new Mp3File(link[i]);
                 if (mp3File.hasId3v2Tag()) {
                     id3v2 = mp3File.getId3v2Tag();
-                    getAlbumArt(link[i]);
+                    createAlbumArt(link[i]);
                     System.out.println("Artist: " + id3v2.getArtist());
                     System.out.println("Title: " + id3v2.getTitle());
                     System.out.println("Type: " + id3v2.getGenreDescription());
                     System.out.println("Copyright: " + id3v2.getCopyright());
                     System.out.println("Album image mime type: " + id3v2.getAlbumImageMimeType());
-                    audioFile = new AudioFile(i + 1 , id3v2.getTitle() , id3v2.getArtist() ,
-                            id3v2.getAlbum() , id3v2.getGenreDescription(), id3v2.getCopyright());
+                    audioFile = new AudioFile(i + 1 , id3v2.getTitle() , id3v2.getArtist() , id3v2.getAlbum() ,
+                            id3v2.getGenreDescription(), id3v2.getCopyright(), link[i].substring(link[i].indexOf("webapp"), link[i].length() - 1),
+                            PATH_COVER.substring(PATH_COVER.indexOf("webapp"), PATH_COVER.length() - 1) + splitName(link[i]));
                     list.add(audioFile);
                 }
             }

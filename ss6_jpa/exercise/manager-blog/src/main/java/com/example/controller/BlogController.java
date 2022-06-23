@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.model.Blog;
 import com.example.model.Catalog;
 import com.example.services.IBlogService;
+import com.example.services.ICatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,9 @@ import java.util.List;
 
 @Controller
 public class BlogController {
+    @Autowired
+    private ICatalogService catalogService;
+
     @Autowired
     private IBlogService blogService;
 
@@ -39,7 +43,7 @@ public class BlogController {
 
     @GetMapping(value = "/create")
     public String showFormCreate (@ModelAttribute("blog") Blog blog , Model model) {
-        List<Catalog> catalogList = blogService.findAllCatalog();
+        List<Catalog> catalogList = catalogService.findAll();
         model.addAttribute("catalogList" , catalogList);
         model.addAttribute("blog" , blog);
         return "/create";

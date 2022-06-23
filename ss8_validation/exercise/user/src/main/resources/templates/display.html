@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display User</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="container">
+    <a class="btn btn-primary" href="/"><i class="fa fa-rotate-back"></i> Back</a>
+    <table class="table table-striped table-inverse" border="1px">
+        <thead class="thead-inverse">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Số điện thoại</th>
+            <th>Tuổi</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${listUsers}">
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="center">
+        <div class="pagination">
+            <a th:if="${listUsers.hasPrevious()}" th:href="@{/display(page = ${listUsers.number - 1})}">&laquo;</a>
+            <span th:each="pageNo: ${#numbers.sequence(0,listUsers.totalPages - 1)}">
+            <a th:href="@{/display(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+            <a th:if="${listUsers.hasNext()}" th:href="@{/display(page = ${listUsers.number + 1})}">&raquo;</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>

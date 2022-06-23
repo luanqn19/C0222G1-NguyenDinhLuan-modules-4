@@ -15,18 +15,22 @@ public class AudioFile {
     private String albumMusic;
     private String genreDescription;
     private String copyRight;
+    private String pathMedia;
+    private String pathCover;
 
     public AudioFile () {
     }
 
     public AudioFile (Integer codeMusic , String titleMusic , String artistMusic , String albumMusic ,
-                      String genreDescription , String copyRight) {
+                      String genreDescription , String copyRight , String pathMedia , String pathCover) {
         this.codeMusic = codeMusic;
         this.titleMusic = titleMusic;
         this.artistMusic = artistMusic;
         this.albumMusic = albumMusic;
         this.genreDescription = genreDescription;
         this.copyRight = copyRight;
+        this.pathMedia = pathMedia;
+        this.pathCover = pathCover;
     }
 
     public Integer getCodeMusic () {
@@ -75,5 +79,21 @@ public class AudioFile {
 
     public void setCopyRight (String copyRight) {
         this.copyRight = copyRight;
+    }
+
+    public String getPathMedia () {
+        return pathMedia;
+    }
+
+    public void setPathMedia (String pathMedia) {
+        this.pathMedia = pathMedia;
+    }
+
+    public String getPathCover () {
+        return pathCover;
+    }
+
+    public void setPathCover (String pathCover) {
+        this.pathCover = pathCover;
     }
 }

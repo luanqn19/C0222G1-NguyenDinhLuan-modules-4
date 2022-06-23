@@ -9,8 +9,6 @@ public interface IBlogService {
 
     List<Blog> findAll ();
 
-    List<Catalog> findAllCatalog ();
-
     void save (Blog blog);
 
     void update (Blog blog);
