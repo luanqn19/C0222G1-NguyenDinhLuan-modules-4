@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Music</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="container">
+    <a class="btn btn-primary" href="/"><i class="fa fa-rotate-back"></i> Back</a>
+    <table class="table table-striped table-inverse" border="1px">
+        <thead class="thead-inverse">
+        <tr>
+            <th>Mã bài hát</th>
+            <th>Tên bài hát</th>
+            <th>Tên ca sỹ</th>
+            <th>Thể loại</th>
+            <th>Trình phát</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="music : ${listMusic}">
+            <td th:text="${music.id}"></td>
+            <td th:text="${music.title}"></td>
+            <td th:text="${music.artist}"></td>
+            <td th:text="${music.type}"></td>
+            <td>
+                <audio controls>
+                    <source th:src="${music.external}" type="audio/mp3">
+                </audio>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="center">
+        <div class="pagination">
+            <a th:if="${listMusic.hasPrevious()}" th:href="@{/display(page = ${listMusic.number - 1})}">&laquo;</a>
+            <span th:each="pageNo: ${#numbers.sequence(0,listMusic.totalPages - 1)}">
+            <a th:href="@{/display(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+            <a th:if="${listMusic.hasNext()}" th:href="@{/display(page = ${listMusic.number + 1})}">&raquo;</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>
