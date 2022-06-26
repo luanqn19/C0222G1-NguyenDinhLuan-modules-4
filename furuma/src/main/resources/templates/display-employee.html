@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Employee</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div th:replace="~{component::header-nav}"></div>
+<div class="container table-customer">
+    <div class="table-responsive">
+        <table class="table table-hover table-inverse" border="1px">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Mã nhân viên</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>số CMND</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Lương</th>
+                <th>Vị trí</th>
+                <th>Trình độ</th>
+                <th>Bộ phận</th>
+                <th>User</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employeeList}">
+                <td th:text="${employee.maNhanVien}"></td>
+                <td th:text="${employee.hoTen}"></td>
+                <td th:text="${employee.ngaySinh}"></td>
+                <td>
+                    <span th:if="${employee.gioiTinh == 0}" th:text="Nam"></span>
+                    <span th:if="${employee.gioiTinh == 1}" th:text="Nữ"></span>
+                </td>
+                <td th:text="${employee.soCmnd}"></td>
+                <td th:text="${employee.soDienThoai}"></td>
+                <td th:text="${employee.email}"></td>
+                <td th:text="${employee.diaChi}"></td>
+                <td th:text="${#numbers.formatDecimal(employee.luong, 0, 0, 'DEFAULT')}"></td>
+                <td th:text="${employee.employeePosition.tenViTri}"></td>
+                <td th:text="${employee.employeeEducation.tenTrinhDo}"></td>
+                <td th:text="${employee.employeeDivision.tenBoPhan}"></td>
+                <td th:text="${employee.employeeUser.tenNguoiDung}"></td>
+                <td>
+                    <button th:data-edt="${employee.maNhanVien}" type="button" class="btn btn-warning btn-sm"
+                            data-toggle="modal" data-target="#modelEdtId"
+                            onclick="getCodeProduct(this)">
+                        <i class="fa fa-pen"></i> Edit
+                    </button>
+                    <button th:data-del="${employee.maNhanVien}" type="button" class="btn btn-danger btn-sm"
+                            data-toggle="modal" data-target="#modelDelId"
+                            onclick="getCodeProductDel(this)">
+                        <i class="fa fa-trash-can"></i> Delete
+                    </button>
+                    <a class="btn btn-info btn-sm" th:href="@{/employee/detail/{maNhanVien}(maNhanVien = ${employee.maNhanVien})}">
+                        <i class="fa fa-info"></i> Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="center">
+            <div class="pagination">
+                <a th:if="${employeeList.hasPrevious()}"
+                   th:href="@{/employee/display(page = ${employeeList.number - 1})}">&laquo;</a>
+                <span th:each="pageNo: ${#numbers.sequence(0,employeeList.totalPages - 1)}">
+            <a th:href="@{/employee/display(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+                <a th:if="${employeeList.hasNext()}" th:href="@{/employee/display(page = ${employeeList.number + 1})}">&raquo;</a>
+            </div>
+        </div>
+    </div>
+
+    <!--modal edit-->
+    <div class="modal fade" id="modelEdtId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn edit thông tin khách hàng có mã là
+                    <input type="text" class="border-warning w-25" id="edt" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="doEdit()">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal delete-->
+    <div class="modal fade" id="modelDelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn xoá thông tin khách hàng có mã là
+                    <input type="text" class="border-warning w-25" id="del" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="doDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{component::footer-nav}"></div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>

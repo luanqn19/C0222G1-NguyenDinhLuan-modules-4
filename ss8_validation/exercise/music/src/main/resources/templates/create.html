@@ -17,7 +17,7 @@
         <h3 style="color: red; font-style: italic" th:if="${msg != null}">Thêm mới bài hát thành công</h3>
     </div>
 
-    <form th:object="${music}" action="/save" method="post">
+    <form th:object="${music}" action="/save" class="needs-validation p-4" method="post" novalidate>
         <!--        <div class="form-group row" hidden>-->
         <!--            <label for="idUser">Mã user: </label>-->
         <!--            <input id="idUser" class="form-control" type="number" th:field="*{id}">-->

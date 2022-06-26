@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Customer</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div th:replace="~{component::header-nav}"></div>
+<div class="container table-customer">
+    <div class="table-responsive">
+        <table class="table table-hover table-inverse" border="1px">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Mã khách hàng</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>số CMND</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Loại khách</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer : ${customerList}">
+                <td th:text="${customer.maKhachHang}"></td>
+                <td th:text="${customer.hoTen}"></td>
+                <td th:text="${customer.ngaySinh}"></td>
+                <td>
+                    <span th:if="${customer.gioiTinh == 0}" th:text="Nam"></span>
+                    <span th:if="${customer.gioiTinh == 1}" th:text="Nữ"></span>
+                </td>
+                <td th:text="${customer.soCmnd}"></td>
+                <td th:text="${customer.soDienThoai}"></td>
+                <td th:text="${customer.email}"></td>
+                <td th:text="${customer.diaChi}"></td>
+                <td th:text="${customer.customerType.tenLoaiKhach}"></td>
+                <td>
+                    <button th:data-edt="${customer.maKhachHang}" type="button" class="btn btn-warning btn-sm"
+                            data-toggle="modal" data-target="#modelEdtId"
+                            onclick="getCodeProduct(this)">
+                        <i class="fa fa-pen"></i> Edit
+                    </button>
+                    <button th:data-del="${customer.maKhachHang}" type="button" class="btn btn-danger btn-sm"
+                            data-toggle="modal" data-target="#modelDelId"
+                            onclick="getCodeProductDel(this)">
+                        <i class="fa fa-trash-can"></i> Delete
+                    </button>
+                    <a class="btn btn-info btn-sm" th:href="@{/detail/{maKhachHang}(maKhachHang = ${customer.maKhachHang})}">
+                        <i class="fa fa-info"></i> Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="center">
+            <div class="pagination">
+                <a th:if="${customerList.hasPrevious()}"
+                   th:href="@{/customer/display(page = ${customerList.number - 1})}">&laquo;</a>
+                <span th:each="pageNo: ${#numbers.sequence(0,customerList.totalPages - 1)}">
+            <a th:href="@{/customer/display(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+                <a th:if="${customerList.hasNext()}" th:href="@{/customer/display(page = ${customerList.number + 1})}">&raquo;</a>
+            </div>
+        </div>
+    </div>
+
+    <!--modal edit-->
+    <div class="modal fade" id="modelEdtId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn edit thông tin khách hàng có mã là
+                    <input type="text" class="border-warning w-25" id="edt" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="doEdit()">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal delete-->
+    <div class="modal fade" id="modelDelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn xoá thông tin khách hàng có mã là
+                    <input type="text" class="border-warning w-25" id="del" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="doDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{component::footer-nav}"></div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>

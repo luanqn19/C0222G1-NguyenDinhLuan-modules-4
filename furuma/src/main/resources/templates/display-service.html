@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Customer</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div th:replace="~{component::header-nav}"></div>
+<div class="container table-customer">
+    <div class="table-responsive">
+        <table class="table table-hover table-inverse" border="1px">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Mã dịch vụ</th>
+                <th>Tên dịch vụ</th>
+                <th>Diện tích</th>
+                <th>Chi phí thuê</th>
+                <th>Số người tối đa</th>
+                <th>Tiêu chuẩn phòng</th>
+                <th>Mô tả tiện nghi khác</th>
+                <th>Diện tích hồ bơi</th>
+                <th>Số tầng</th>
+                <th>Dịch vụ đi kèm</th>
+                <th>Kiểu thuê</th>
+                <th>Loại dịch vụ</th>
+                <th>Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="facility : ${facilityList}">
+                <td th:text="${facility.maDichVu}"></td>
+                <td th:text="${facility.tenDichVu}"></td>
+                <td th:text="${#numbers.formatDecimal(facility.dienTich, 0, 0, 'DEFAULT')}"></td>
+                <td th:text="${#numbers.formatDecimal(facility.chiPhiThue, 0, 0, 'DEFAULT')}"></td>
+                <td th:text="${facility.soNguoiToiDa}"></td>
+                <td th:text="${facility.tieuChuanPhong}"></td>
+                <td th:text="${facility.moTaTienNghiKhac}"></td>
+                <td th:text="${#numbers.formatDecimal(facility.dienTichHoBoi, 0, 0, 'DEFAULT')}"></td>
+                <td th:text="${facility.soTang}"></td>
+                <td th:text="${facility.dichVuDiKem}"></td>
+                <td th:text="${facility.facilityRentType.tenKieuThue}"></td>
+                <td th:text="${facility.facilityServiceType.tenLoaiDichVu}"></td>
+                <td>
+                    <button th:data-edt="${facility.maDichVu}" type="button" class="btn btn-warning btn-sm"
+                            data-toggle="modal" data-target="#modelEdtId"
+                            onclick="getCodeProduct(this)">
+                        <i class="fa fa-pen"></i> Edit
+                    </button>
+                    <button th:data-del="${facility.maDichVu}" type="button" class="btn btn-danger btn-sm"
+                            data-toggle="modal" data-target="#modelDelId"
+                            onclick="getCodeProductDel(this)">
+                        <i class="fa fa-trash-can"></i> Delete
+                    </button>
+                    <a class="btn btn-info btn-sm" th:href="@{/service/detail/{maDichVu}(maDichVu = ${facility.maDichVu})}">
+                        <i class="fa fa-info"></i> Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="center">
+            <div class="pagination">
+                <a th:if="${facilityList.hasPrevious()}"
+                   th:href="@{/service/display(page = ${facilityList.number - 1})}">&laquo;</a>
+                <span th:each="pageNo: ${#numbers.sequence(0,facilityList.totalPages - 1)}">
+            <a th:href="@{/service/display(page = ${pageNo})}" th:text="${pageNo}"></a>
+        </span>
+                <a th:if="${facilityList.hasNext()}" th:href="@{/service/display(page = ${facilityList.number + 1})}">&raquo;</a>
+            </div>
+        </div>
+    </div>
+
+    <!--modal edit-->
+    <div class="modal fade" id="modelEdtId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn edit thông tin dịch vụ có mã là
+                    <input type="text" class="border-warning w-25" id="edt" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="doEdit()">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--modal delete-->
+    <div class="modal fade" id="modelDelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn xoá thông tin dịch vụ có mã là
+                    <input type="text" class="border-warning w-25" id="del" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="doDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{component::footer-nav}"></div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>
