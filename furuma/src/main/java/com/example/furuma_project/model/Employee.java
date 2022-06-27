@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "nhan_vien")
 public class Employee {
@@ -17,6 +18,9 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ma_nhan_vien", columnDefinition = "VARCHAR(45)")
     Integer maNhanVien;
+
+    @OneToMany(mappedBy = "employeeContract")
+    List<Contract> employeeContractList;
 
     @ManyToOne
     @JoinColumn(name = "ma_vi_tri")
@@ -193,5 +197,13 @@ public class Employee {
 
     public void setDiaChi (String diaChi) {
         this.diaChi = diaChi;
+    }
+
+    public List<Contract> getEmployeeContractList () {
+        return employeeContractList;
+    }
+
+    public void setEmployeeContractList (List<Contract> employeeContractList) {
+        this.employeeContractList = employeeContractList;
     }
 }

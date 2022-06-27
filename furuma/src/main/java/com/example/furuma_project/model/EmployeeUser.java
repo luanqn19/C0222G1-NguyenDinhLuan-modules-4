@@ -19,7 +19,10 @@ public class EmployeeUser {
     private String matKhau;
 
     @OneToMany(mappedBy = "employeeUser")
-    private List<Employee> listUser;
+    private List<Employee> employeeUserList;
+
+    @OneToMany(mappedBy = "employeeUserRole")
+    private List<RoleUser> roleUserList;
 
     public EmployeeUser () {
     }
@@ -45,11 +48,19 @@ public class EmployeeUser {
         this.matKhau = matKhau;
     }
 
-    public List<Employee> getListUser () {
-        return listUser;
+    public List<Employee> getEmployeeUserList () {
+        return employeeUserList;
     }
 
-    public void setListUser (List<Employee> listUser) {
-        this.listUser = listUser;
+    public void setEmployeeUserList (List<Employee> employeeUserList) {
+        this.employeeUserList = employeeUserList;
+    }
+
+    public List<RoleUser> getRoleUserList () {
+        return roleUserList;
+    }
+
+    public void setRoleUserList (List<RoleUser> roleUserList) {
+        this.roleUserList = roleUserList;
     }
 }

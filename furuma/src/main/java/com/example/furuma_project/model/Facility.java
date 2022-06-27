@@ -5,6 +5,7 @@ import com.example.furuma_project.utils.annotation.NameConstraint;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity(name = "dich_vu")
 public class Facility {
@@ -20,6 +21,9 @@ public class Facility {
     @Min(value = 0, message = "Số người tối đa phải lớn hơn 0!")
     @Column(name = "so_nguoi_toi_da", columnDefinition = "INT")
     private Integer soNguoiToiDa;
+
+    @OneToMany(mappedBy = "facilityContract")
+    List<Contract> facilityContractList;
 
     @ManyToOne
     @JoinColumn(name = "ma_kieu_thue")
@@ -173,5 +177,13 @@ public class Facility {
 
     public void setDienTichHoBoi (Double dienTichHoBoi) {
         this.dienTichHoBoi = dienTichHoBoi;
+    }
+
+    public List<Contract> getFacilityContractList () {
+        return facilityContractList;
+    }
+
+    public void setFacilityContractList (List<Contract> facilityContractList) {
+        this.facilityContractList = facilityContractList;
     }
 }

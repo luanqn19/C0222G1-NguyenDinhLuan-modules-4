@@ -83,4 +83,6 @@ public class FurumaController {
         model.addAttribute("facilityList" , facilityList);
         return "display-service";
     }
+
+    //Contract
 }

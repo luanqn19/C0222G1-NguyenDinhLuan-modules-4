@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
+import java.util.List;
 
 @Entity(name = "khach_hang")
 public class Customer {
@@ -20,6 +21,9 @@ public class Customer {
     @ManyToOne
     @JoinColumn(name = "ma_loai_khach")
     private CustomerType customerType;
+
+    @OneToMany(mappedBy = "customerContract")
+    private List<Contract> customerContractList;
 
     @NameConstraint(message = "Họ và tên không đúng định dạng")
     @NotBlank(message = "Họ và tên không được để trống!")
@@ -139,5 +143,13 @@ public class Customer {
 
     public void setDiaChi (String diaChi) {
         this.diaChi = diaChi;
+    }
+
+    public List<Contract> getCustomerContractList () {
+        return customerContractList;
+    }
+
+    public void setCustomerContractList (List<Contract> customerContractList) {
+        this.customerContractList = customerContractList;
     }
 }
