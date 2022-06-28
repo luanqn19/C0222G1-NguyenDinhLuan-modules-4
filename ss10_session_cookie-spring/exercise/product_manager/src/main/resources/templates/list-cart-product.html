@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Music</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div th:replace="~{component::header-nav}"></div>
+<div class="container">
+    <h3 class="text-center">Giỏ hàng</h3>
+    <h4>Tổng item: <span th:text="${cartList.countItemQuantity()}"></span></h4>
+    <h4>Tổng sản phẩm: <span th:text="${cartList.countProductQuantity()}"></span></h4>
+    <div class="card-group">
+        <div class="card" th:each="entry : ${cartList.getListProduct()}">
+            <img class="card-img-top" style="width: auto; height: auto" th:src="${entry.getKey().linkImage}"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title" th:text="${entry.getKey().nameProduct}"></h4>
+            </div>
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">Mã sản phẩm: <span th:text="${entry.getKey().codeProduct}"></span></li>
+                <li class="list-group-item">Giá sản phẩm: <span
+                        th:text="${#numbers.formatCurrency(entry.getKey().priceProduct)}"></span></li>
+                <li class="list-group-item">Số lượng:
+                    <a id="decrease_button"
+                       th:href="@{/add-product/__${entry.getKey().codeProduct}__(action='decrement')}"
+                       th:text="${'-'}"></a>
+                    <span th:text="${entry.getValue()}"></span>
+                    <a id="increase_button"
+                       th:href="@{/add-product/__${entry.getKey().codeProduct}__(action='increment')}"
+                       th:text="${'+'}"></a>
+                </li>
+                <li class="list-group-item">
+                    <a class="btn btn-danger"
+                       th:href="@{/add-product/__${entry.getKey().codeProduct}__(action='delete')}"><i
+                            class="fa fa-trash-can"></i> Xoá sản phẩm</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <h4>Tổng tiền: <span th:text="${#numbers.formatCurrency(cartList.countTotalPayment())}"></span></h4>
+</div>
+<div th:replace="~{component::footer-nav}"></div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>

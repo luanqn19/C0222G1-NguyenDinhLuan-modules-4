@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Music</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div th:replace="~{component::header-nav}"></div>
+<div class="container">
+    <div class="card-group detail-group">
+        <div class="card">
+            <img class="card-img-top" th:src="${product.linkImage}" alt="Card image cap"
+                 style="width: auto; height: auto">
+            <div class="card-body text-center">
+                <h4 class="card-title" th:text="${product.nameProduct}"></h4>
+                <p class="card-text" th:text="${#numbers.formatCurrency(product.priceProduct)}"></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">
+                    <a class="btn btn-info" th:href="@{/add-product/__${product.codeProduct}__(action='list')}"><i class="fa fa-cart-shopping"></i> Mua ngay</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title" th:text="${product.nameProduct}"></h4>
+                <ol class="card-text" style="color: orange">
+                    <li> Tặng banner, thiệp (trị giá 20.000đ) miễn phí.</li>
+                    <li> Giảm ngay 20.000đ khi bạn tạo đơn online.</li>
+                    <li> Giảm tiếp 3% cho lần 2, 5% cho lần 6 và 10% cho lần 12</li>
+                    <li> Giao hàng miễn phí trên 63/63</li>
+                    <li> Giao gấp trong 2 giờ</li>
+                    <li> Cam kết 100% hoàn tiền nếu bạn không hài lòng</li>
+                    <li> Cam kết hoa tươi trên 3 ngày</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{component::footer-nav}"></div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>
