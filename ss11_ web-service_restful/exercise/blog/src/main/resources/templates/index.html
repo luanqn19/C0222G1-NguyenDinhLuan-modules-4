@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="container">
+    <div class="dropdown open">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+            Utilities
+        </button>
+        <div class="dropdown-menu" aria-labelledby="triggerId">
+            <h6 class="dropdown-header">Blog Section</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/create">Add</a>
+            <a class="dropdown-item" href="/display">Display</a>
+            <a class="dropdown-item" href="/search">Search</a>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">Catelog Section</h6>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Add</a>
+            <a class="dropdown-item" href="#">Display</a>
+            <a class="dropdown-item" href="#">Search</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled" href="#">Designer by Luan Nguyen</a>
+        </div>
+    </div>
+</div>
+<!--    <div th:insert="~{common-product :: header-page}"></div>-->
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>
