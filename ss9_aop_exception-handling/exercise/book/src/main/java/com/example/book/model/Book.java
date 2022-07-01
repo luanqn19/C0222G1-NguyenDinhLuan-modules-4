@@ -16,7 +16,7 @@ public class Book {
     private Integer amount;
 
     @OneToMany(mappedBy = "book")
-    List<User> userList;
+    private List<User> userList;
 
     public Book () {
     }
