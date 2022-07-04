@@ -1,6 +1,8 @@
 package com.example.furuma_project.model;
 
 import com.example.furuma_project.utils.annotation.NameConstraint;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,6 +21,8 @@ public class EmployeePosition {
     private String tenViTri;
 
     @OneToMany(mappedBy = "employeePosition")
+//    @JsonBackReference(value = "employee_position_listPosition")
+    @JsonIgnore
     private List<Employee> listPosition;
 
     public EmployeePosition () {

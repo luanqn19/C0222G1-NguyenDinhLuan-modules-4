@@ -1,18 +1,22 @@
 package com.example.furuma_project.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity(name = "vai_tro_nguoi_dung")
-public class RoleUser {
+public class RoleUser implements Serializable {
+    @Id
     @ManyToOne
     @JoinColumn(name = "vai_tro_id")
+    @JsonManagedReference("role_user_role")
     private Role role;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "ten_nguoi_dung")
+    @JsonManagedReference(value = "role_user_employeeUserRole")
     private EmployeeUser employeeUserRole;
 
     public RoleUser () {

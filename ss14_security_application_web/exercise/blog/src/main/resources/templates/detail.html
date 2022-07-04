@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div th:replace="~{component::header-nav}"></div>
+<input type="text" th:value="${page}" hidden>
+<div class="container display-table" id="container-blog">
+    <div class="blog-item" th:each="blog : ${listBlog}">
+        <div class="justify-content-center text-center row">
+            <h2 style="color: red; font-style: italic" th:text="${blog.titleBlog}"></h2>
+        </div>
+        <div class="justify-content-center text-center row">
+            <h4 style="font-style: italic">Tác giả: <h4 style="font-style: italic" th:text="${blog.artistBlog}"></h4>
+            </h4>
+        </div>
+        <p class="justify-content-center text-center row" th:text="${blog.contentBlog}"></p>
+    </div>
+</div>
+<div class="text-center">
+    <button class="btn btn-link" id="add-blog">Xem thêm</button>
+</div>
+<div th:replace="~{component::footer-nav}"></div>
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>

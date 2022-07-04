@@ -37,8 +37,10 @@ public class FurumaController {
     //Customer
     @GetMapping("/customer/display")
     public String showListCustomer (@RequestParam(name = "page", defaultValue = "0") int page , Model model) {
+        List<CustomerType> customerTypeList = customerTypeService.findAll();
         Page<Customer> customerList = customerService.findAll(PageRequest.of(page , 3));
         model.addAttribute("customerList" , customerList);
+        model.addAttribute("customerTypeList" , customerTypeList);
         return "display-customer";
     }
 

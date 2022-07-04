@@ -1,6 +1,8 @@
 package com.example.furuma_project.model;
 
 import com.example.furuma_project.utils.annotation.NameConstraint;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -32,6 +34,8 @@ public class AttachFacility {
     private Double gia;
 
     @OneToMany(mappedBy = "attachFacility")
+//    @JsonBackReference(value = "attact_facility_contractDetailAttachList")
+    @JsonIgnore
     List<ContractDetail> contractDetailAttachList;
 
     public AttachFacility () {

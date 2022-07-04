@@ -1,6 +1,9 @@
 package com.example.furuma_project.model;
 
 import com.example.furuma_project.utils.annotation.NameConstraint;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -23,14 +26,18 @@ public class Facility {
     private Integer soNguoiToiDa;
 
     @OneToMany(mappedBy = "facilityContract")
+//    @JsonBackReference(value = "facility_facilityContractList")
+    @JsonIgnore
     List<Contract> facilityContractList;
 
     @ManyToOne
     @JoinColumn(name = "ma_kieu_thue")
+//    @JsonManagedReference(value = "facility_facilityRentType")
     private FacilityRentType facilityRentType;
 
     @ManyToOne
     @JoinColumn(name = "ma_loai_dich_vu")
+//    @JsonManagedReference(value = "facility_facilityServiceType")
     private FacilityServiceType facilityServiceType;
 
     @Min(value = 0, message = "Số tầng phải lớn hơn 0!")

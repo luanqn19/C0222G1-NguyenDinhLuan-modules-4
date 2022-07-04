@@ -1,5 +1,8 @@
 package com.example.furuma_project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class FacilityRentType {
     private Double giaKieuThue;
 
     @OneToMany(mappedBy = "facilityRentType")
+//    @JsonBackReference(value = "facility_rent_type_rentList")
+    @JsonIgnore
     private List<Facility> rentList;
 
     public FacilityRentType () {

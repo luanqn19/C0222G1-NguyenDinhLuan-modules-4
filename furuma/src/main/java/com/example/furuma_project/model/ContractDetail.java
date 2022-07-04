@@ -1,5 +1,7 @@
 package com.example.furuma_project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
@@ -16,10 +18,12 @@ public class ContractDetail {
 
     @ManyToOne
     @JoinColumn(name = "ma_hop_dong")
+//    @JsonManagedReference(value = "contract_detail_contact")
     private Contract contract;
 
     @ManyToOne
     @JoinColumn(name = "ma_dich_vu_di_kem")
+//    @JsonManagedReference(value = "contract_detail_attachFacility")
     private AttachFacility attachFacility;
 
     public ContractDetail () {

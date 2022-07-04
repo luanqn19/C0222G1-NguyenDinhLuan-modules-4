@@ -1,5 +1,8 @@
 package com.example.furuma_project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -16,6 +19,8 @@ public class Role {
     private String tenVaiTro;
 
     @OneToMany(mappedBy = "role")
+//    @JsonBackReference(value = "role_roleUserList")
+    @JsonIgnore
     List<RoleUser> roleUserList;
 
     public Role () {

@@ -1,5 +1,8 @@
 package com.example.furuma_project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,7 +14,7 @@ import java.util.List;
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ma_dong_dong", columnDefinition = "INT")
+    @Column(name = "ma_hop_dong", columnDefinition = "INT")
     private Integer maHopDong;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -31,17 +34,22 @@ public class Contract {
 
     @ManyToOne
     @JoinColumn(name = "ma_nhan_vien")
+//    @JsonManagedReference(value = "contract_employeeContract")
     private Employee employeeContract;
 
     @ManyToOne
     @JoinColumn(name = "ma_khach_hang")
+//    @JsonManagedReference(value = "contract_customerContract")
     private Customer customerContract;
 
     @ManyToOne
     @JoinColumn(name = "ma_dich_vu")
+//    @JsonManagedReference(value = "contact_facilityContract")
     private Facility facilityContract;
 
-    @OneToMany(mappedBy = "ma_hop_dong_chi_tiet")
+    @OneToMany(mappedBy = "contract")
+//    @JsonBackReference(value = "contract_contractDetailContractList")
+    @JsonIgnore
     List<ContractDetail> contractDetailContractList;
 
     public Contract () {

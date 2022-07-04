@@ -1,5 +1,8 @@
 package com.example.furuma_project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,9 +22,13 @@ public class EmployeeUser {
     private String matKhau;
 
     @OneToMany(mappedBy = "employeeUser")
+//    @JsonBackReference(value = "employee_user_employeeUserList")
+    @JsonIgnore
     private List<Employee> employeeUserList;
 
     @OneToMany(mappedBy = "employeeUserRole")
+//    @JsonBackReference(value = "employee_user_roleUserList")
+    @JsonIgnore
     private List<RoleUser> roleUserList;
 
     public EmployeeUser () {

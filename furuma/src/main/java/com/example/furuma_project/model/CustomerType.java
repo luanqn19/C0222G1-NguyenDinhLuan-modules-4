@@ -1,5 +1,8 @@
 package com.example.furuma_project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +17,8 @@ public class CustomerType {
     private String tenLoaiKhach;
 
     @OneToMany(mappedBy = "customerType")
+//    @JsonBackReference(value = "customerType_customerList")
+    @JsonIgnore
     private List<Customer> customerList;
 
     public CustomerType () {

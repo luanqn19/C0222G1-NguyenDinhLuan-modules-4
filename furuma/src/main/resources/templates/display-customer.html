@@ -10,6 +10,9 @@
 <body>
 <div th:replace="~{component::header-nav}"></div>
 <div class="container table-customer">
+    <div class="mt-1 mb-1">
+        <button class="btn btn-outline-success" data-toggle="modal" data-target="#modalAddId"><i class="fa fa-plus"></i> Thêm mới</button>
+    </div>
     <div class="table-responsive">
         <table class="table table-hover table-inverse" border="1px">
             <thead class="thead-inverse">
@@ -69,6 +72,86 @@
             </div>
         </div>
     </div>
+    <!--modal add-->
+    <div class="modal fade" id="modalAddId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="body-addnew">
+                    <div class="container">
+                        <div class="form-group row">
+                            <label for="maKhachHang-add">Mã khách hàng: </label>
+                            <input type="number" id="maKhachHang-add" class="form-control" readonly>
+                        </div>
+                        <div class="form-group row">
+                            <label for="hoTen-add">Họ và tên: </label>
+                            <input type="text" id="hoTen-add" class="form-control" placeholder="Họ và tên" aria-describedby="helpNameId">
+                            <small id="helpNameId" class="text-muted">Không có ký tự đặc biệt hoặc số</small>
+                            <p class="w-100" id="errorName"></p>
+                        </div>
+                        <div class="form-group row">
+                            <label for="ngaySinh-add">Ngày sinh: </label>
+                            <input type="date" id="ngaySinh-add" class="form-control" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="gioiTinh-add">Giới tính: </label>
+                            <select class="form-control" id="gioiTinh-add">
+                                <option value="0">Nam</option>
+                                <option value="1">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label for="soCmnd-add">Số CMND/CCCD: </label>
+                                <input id="soCmnd-add" class="form-control" type="text" aria-describedby="helpSoCmndId">
+                                <small id="helpSoCmndId" class="text-muted">Không có ký tự đặc biệt</small>
+                                <p class="w-100" id="errorCmnd"></p>
+                            </div>
+                            <div class="col-6">
+                                <label for="soDienThoai-add">Số điện thoại: </label>
+                                <input id="soDienThoai-add" class="form-control" type="text" aria-describedby="helpSdtId">
+                                <small id="helpSdtId" class="text-muted">Định dạng +84|0{3|9}-xx.xx.xx.xx</small>
+                                <p class="w-100" id="errorPhone"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-6">
+                                <label for="email-add">Email: </label>
+                                <input id="email-add" class="form-control" type="text" aria-describedby="helpEmailId">
+                                <small id="helpEmailId" class="text-muted">Định dạng VD: abc123@domain.com</small>
+                                <p class="w-100" id="errorEmail"></p>
+                            </div>
+                            <div class="col-6">
+                                <label for="diaChi-add">Địa chỉ: </label>
+                                <input id="diaChi-add" class="form-control" type="text" aria-describedby="helpDiaChiId">
+                                <small id="helpDiaChiId" class="text-muted">Định dạng VD: 123 hoặc 123/12 Trần Độc</small>
+                                <p class="w-100" id="errorAddr"></p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="type-add">Danh mục: </label>
+                            <select name="type" class="form-control" id="type-add">
+                                <option th:each="customerType:${customerTypeList}"
+                                        th:value="${customerType.maLoaiKhach}"
+                                        th:text="${customerType.tenLoaiKhach}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="customer-add-new"><i class="fa fa-save"></i> Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--modal edit-->
     <div class="modal fade" id="modelEdtId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
@@ -121,4 +204,5 @@
 <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/custom.js"></script>
+<script src="/js/customer.js"></script>
 </html>

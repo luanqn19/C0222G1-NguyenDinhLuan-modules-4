@@ -4,6 +4,9 @@ import com.example.furuma_project.utils.annotation.AddressConstraint;
 import com.example.furuma_project.utils.annotation.EmailConstraint;
 import com.example.furuma_project.utils.annotation.NameConstraint;
 import com.example.furuma_project.utils.annotation.PhoneConstraint;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -20,9 +23,12 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "ma_loai_khach")
+//    @JsonManagedReference(value = "customer_customerType")
     private CustomerType customerType;
 
     @OneToMany(mappedBy = "customerContract")
+//    @JsonBackReference(value = "customer_customerContractList")
+    @JsonIgnore
     private List<Contract> customerContractList;
 
     @NameConstraint(message = "Họ và tên không đúng định dạng")

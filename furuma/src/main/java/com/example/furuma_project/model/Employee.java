@@ -4,6 +4,9 @@ import com.example.furuma_project.utils.annotation.AddressConstraint;
 import com.example.furuma_project.utils.annotation.EmailConstraint;
 import com.example.furuma_project.utils.annotation.NameConstraint;
 import com.example.furuma_project.utils.annotation.PhoneConstraint;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -17,25 +20,31 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ma_nhan_vien", columnDefinition = "VARCHAR(45)")
-    Integer maNhanVien;
+    private Integer maNhanVien;
 
     @OneToMany(mappedBy = "employeeContract")
-    List<Contract> employeeContractList;
+//    @JsonBackReference(value = "employee_employeeContractList")
+    @JsonIgnore
+    private List<Contract> employeeContractList;
 
     @ManyToOne
     @JoinColumn(name = "ma_vi_tri")
+//    @JsonManagedReference(value = "employee_employeePosition")
     private EmployeePosition employeePosition;
 
     @ManyToOne
     @JoinColumn(name = "ma_trinh_do")
+//    @JsonManagedReference(value = "employee_employeeEducation")
     private EmployeeEducation employeeEducation;
 
     @ManyToOne
     @JoinColumn(name = "ma_bo_phan")
+//    @JsonManagedReference(value = "employee_employeeDivision")
     private EmployeeDivision employeeDivision;
 
     @ManyToOne
     @JoinColumn(name = "ten_nguoi_dung")
+//    @JsonManagedReference(value = "employee_employeeUser")
     private EmployeeUser employeeUser;
 
     @NameConstraint(message = "Họ và tên không đúng định dạng")
