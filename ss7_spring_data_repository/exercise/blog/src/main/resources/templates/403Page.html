@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Access Denied</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+<div th:replace="~{component::header-nav}"></div>
+
+<h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
+
+<div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+
+</body>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/custom.js"></script>
+</html>

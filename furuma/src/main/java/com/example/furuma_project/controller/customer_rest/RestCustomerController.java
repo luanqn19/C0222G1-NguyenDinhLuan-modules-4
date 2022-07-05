@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "customer-api")
 public class RestCustomerController {
@@ -21,6 +23,11 @@ public class RestCustomerController {
     @GetMapping(value = "/customer/list")
     public ResponseEntity<Page<Customer>> allCustomer (@RequestParam(value = "page", defaultValue = "0") int page) {
         return new ResponseEntity<>(customerService.findAll(PageRequest.of(page, 5)), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/customer/list-customer")
+    public ResponseEntity<List<Customer>> allListCustomer () {
+        return new ResponseEntity<>(customerService.findAllCustomer(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/customer/save")

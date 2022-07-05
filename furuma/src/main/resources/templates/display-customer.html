@@ -29,7 +29,7 @@
                 <th>Thao tác</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="body">
             <tr th:each="customer : ${customerList}">
                 <td th:text="${customer.maKhachHang}"></td>
                 <td th:text="${customer.hoTen}"></td>
@@ -200,9 +200,12 @@
 </div>
 <div th:replace="~{component::footer-nav}"></div>
 </body>
-<script src="/js/jquery.slim.min.js"></script>
-<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+<!--<script src="/js/jquery.slim.min.js"></script>-->
+<!--<script src="/bootstrap/dist/js/bootstrap.min.js"></script>-->
+<script src="/lib/ajax/jquery.min.js"></script>
+<script src="/lib/popper/popper.min.js"></script>
+<script src="/lib/bootstrap/bootstrap.min.js"></script>
 <script src="/js/custom.js"></script>
 <script src="/js/customer.js"></script>
 </html>

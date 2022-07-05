@@ -1,5 +1,6 @@
 package com.example.furuma_project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -10,13 +11,11 @@ public class RoleUser implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "vai_tro_id")
-    @JsonManagedReference("role_user_role")
     private Role role;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "ten_nguoi_dung")
-    @JsonManagedReference(value = "role_user_employeeUserRole")
     private EmployeeUser employeeUserRole;
 
     public RoleUser () {

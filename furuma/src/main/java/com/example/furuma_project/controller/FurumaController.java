@@ -44,30 +44,6 @@ public class FurumaController {
         return "display-customer";
     }
 
-    @GetMapping("/customer/create")
-    public String showCreateCustomer (@ModelAttribute("customer") Customer customer , Model model) {
-        List<CustomerType> customerTypeList = customerTypeService.findAll();
-        model.addAttribute("customer" , customer);
-        model.addAttribute("customerTypeList" , customerTypeList);
-        return "create-customer";
-    }
-
-    @PostMapping("/customer/save")
-    public String save (@Valid @ModelAttribute("customer") Customer customer ,
-                        BindingResult result , Model model) {
-        List<CustomerType> customerTypeList = customerTypeService.findAll();
-        if (result.hasErrors()) {
-            model.addAttribute("customerTypeList" , customerTypeList);
-            return "create-customer";
-        }
-
-        customerService.save(customer);
-
-        model.addAttribute("customerTypeList" , customerTypeList);
-        model.addAttribute("msg" , "Thêm mới thành công");
-        return "customer/create";
-    }
-
     //Employee
     @GetMapping("/employee/display")
     public String showListEmployee (@RequestParam(name = "page", defaultValue = "0") int page , Model model) {
